@@ -1,5 +1,5 @@
 class Pangram {
-  private static uniqueCharactersRegexp = /([a-z])(?!.*\1)/g;
+  private static notLettersRegexp = /[^a-zA-Z]/g;
   private static numberOfExpectedUniqueCharacters = 26;
 
   constructor(private readonly sentence: string) {
@@ -7,7 +7,8 @@ class Pangram {
 
   isPangram(): boolean {
     const lowerCaseSentence = this.sentence.toLowerCase();
-    return (lowerCaseSentence.match(Pangram.uniqueCharactersRegexp) || []).length === Pangram.numberOfExpectedUniqueCharacters;
+    const sentenceWithOnlyLetters = lowerCaseSentence.replace(Pangram.notLettersRegexp, "");
+    return new Set(sentenceWithOnlyLetters).size === Pangram.numberOfExpectedUniqueCharacters;
   }
 }
 
