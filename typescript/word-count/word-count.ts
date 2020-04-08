@@ -1,23 +1,13 @@
 class Words {
   count(sentence: string): Map<string, number> {
-    const result = new Map();
-    const words = sentence
-      .trimStart()
-      .trimEnd()
+    return sentence
+      .trim()
       .toLowerCase()
-      .replace(/\s+/g, ' ')
-      .split(' ');
-
-    for (const word of words) {
-      if (result.has(word)) {
-        const currentValueForWord = result.get(word);
-        result.set(word, currentValueForWord + 1);
-      } else {
-        result.set(word, 1);
-      }
-    }
-
-    return result;
+      .split(/\s+/)
+      .reduce((map, word) => {
+        const wordCounter = map.get(word) || 0;
+        return map.set(word, wordCounter + 1);
+      }, new Map<string, number>());
   }
 }
 
