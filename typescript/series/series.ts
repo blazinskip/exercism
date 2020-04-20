@@ -9,8 +9,18 @@ class Series {
     return this._digits;
   }
 
-  slices(numberOfSlices: number): [number[]] {
-    return [[numberOfSlices]];
+  slices(chunkSize: number) {
+    if (chunkSize > this._digits.length) {
+      throw new Error();
+    }
+
+    const result = [];
+
+    for (let i = 0; i < this._digits.length - chunkSize + 1; i++) {
+      result.push(this._digits.slice(i, i + chunkSize));
+    }
+
+    return result;
   }
 }
 
