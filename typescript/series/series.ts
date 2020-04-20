@@ -9,15 +9,17 @@ class Series {
     return this._digits;
   }
 
-  slices(chunkSize: number) {
+  slices(chunkSize: number): number[][] {
     if (chunkSize > this._digits.length) {
       throw new Error();
     }
 
-    const result = [];
+    const digitsCopy = [...this._digits];
+    const result: number[][] = [];
 
-    for (let i = 0; i < this._digits.length - chunkSize + 1; i++) {
-      result.push(this._digits.slice(i, i + chunkSize));
+    while (chunkSize <= digitsCopy.length) {
+      result.push(digitsCopy.slice(0, chunkSize));
+      digitsCopy.shift();
     }
 
     return result;
