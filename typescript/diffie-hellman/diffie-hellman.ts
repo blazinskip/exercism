@@ -1,20 +1,28 @@
 class DiffieHellman {
   constructor(private p: number, private g: number) {
+    if (p < 1 || g > p) {
+      throw new Error('Arguments out of range');
+    }
+
     if (!DiffieHellman.isPrime(p) || !DiffieHellman.isPrime(g)) {
-      throw new Error();
+      throw new Error('Arguments are not prime');
     }
   }
 
   getPublicKeyFromPrivateKey(privateKey: number) {
-    if (privateKey <= 1 || privateKey === this.p || privateKey > this.p) {
-      throw new Error();
+    if (privateKey <= 1) {
+      throw new Error('Private key must be greater than 1');
     }
 
-    return Math.pow(this.g, privateKey) % this.p;
+    if (privateKey >= this.p) {
+      throw new Error('Private key cannot be greater than or equal to modulus parameter p');
+    }
+
+    return this.g ** privateKey % this.p;
   }
 
   getSharedSecret(privateKey: number, publicKey: number): number {
-    return Math.pow(publicKey, privateKey) % this.p;
+    return publicKey ** privateKey % this.p;
   }
 
   private static isPrime(numberToCheck: number): boolean {
