@@ -5,10 +5,8 @@ class Squares {
 
   constructor(number: number) {
     const rangeFromOneToNumber = [...Array(number).keys()].map(i => i + 1);
-    this._squareOfSum = rangeFromOneToNumber
-      .reduce((previousValue, currentValue) => previousValue + currentValue, 0) ** 2;
-    this._sumOfSquares = rangeFromOneToNumber.map(number => number ** 2)
-      .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+    this._squareOfSum = Squares.sum(rangeFromOneToNumber) ** 2;
+    this._sumOfSquares = Squares.sum(rangeFromOneToNumber.map(number => number ** 2));
     this._difference = this._squareOfSum - this._sumOfSquares;
   }
 
@@ -22,6 +20,10 @@ class Squares {
 
   get difference(): number {
     return this._difference;
+  }
+
+  private static sum(numbers: number[]): number {
+    return numbers.reduce((sum: number, value: number) => sum + value, 0);
   }
 }
 
