@@ -1,13 +1,16 @@
-function transform(oldValue: { [key: string]: string[]; }): { [key: string]: number; } {
-  let result: { [key: string]: number; } = {};
-  for (const [point, letters] of Object.entries(oldValue)) {
-    const newModelForPoint = letters
-      .reduce((acc, letter) => ({ ...acc, [letter.toLowerCase()]: Number(point) }), {});
+type OldRecord = { [key: string]: string[] }
+type NewRecord = { [key: string]: number }
 
-    result = { ...result, ...newModelForPoint };
+function transform(oldScores: OldRecord): NewRecord {
+  let newScores: NewRecord = {};
+  for (const [score, letters] of Object.entries(oldScores)) {
+    const newRecordsForScore = letters
+      .reduce((acc, letter) => ({ ...acc, [letter.toLowerCase()]: Number(score) }), {});
+
+    newScores = { ...newScores, ...newRecordsForScore };
   }
 
-  return result;
+  return newScores;
 }
 
 export default transform;
