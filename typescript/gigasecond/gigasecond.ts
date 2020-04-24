@@ -1,15 +1,16 @@
 class Gigasecond {
-  private static gigasecond = 1000000000;
+  private static oneGigaSecond = 1000000000;
   private static oneMillisecond = 1000;
+  private static thousandGigaMillisecond = Gigasecond.oneGigaSecond * Gigasecond.oneMillisecond;
 
-  private readonly dateWithAddedGigasecond: Date;
+  private readonly dateWithAddedOneGigaSecond: Date;
 
   constructor(date: Date) {
-    this.dateWithAddedGigasecond = new Date(date.getTime() + Gigasecond.gigasecond * Gigasecond.oneMillisecond);
+    this.dateWithAddedOneGigaSecond = new Date(date.getTime() + Gigasecond.thousandGigaMillisecond);
   }
 
   date(): Date {
-    return this.dateWithAddedGigasecond;
+    return this.dateWithAddedOneGigaSecond;
   }
 }
 
