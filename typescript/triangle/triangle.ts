@@ -1,3 +1,5 @@
+type TriangleKind = 'equilateral' | 'isosceles' | 'scalene';
+
 export default class Triangle {
   private readonly aSide: number;
   private readonly bSide: number;
@@ -10,7 +12,7 @@ export default class Triangle {
     this.cSide = c;
   }
 
-  kind() {
+  kind(): TriangleKind {
     if (Triangle.isNotTriangle(this.aSide, this.bSide, this.cSide)) {
       throw new Error('is not a triangle');
     }
@@ -23,7 +25,7 @@ export default class Triangle {
       return 'isosceles';
     }
 
-    return "scalene";
+    return 'scalene';
   }
 
   private static isNotTriangle(a: number, b: number, c: number) {
