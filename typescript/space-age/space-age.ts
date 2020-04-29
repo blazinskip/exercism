@@ -1,56 +1,60 @@
+type Planet = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune';
+
 class SpaceAge {
   private static earthYearInSeconds = 31557600;
-  private static planetsYearScale = {
+  private static planetsYearScale: { [key in Planet]: number } = {
     mercury: 0.2408467,
     venus: 0.61519726,
+    earth: 1,
     mars: 1.8808158,
     jupiter: 11.862615,
     saturn: 29.447498,
     uranus: 84.016846,
-    naptune: 164.79132,
+    neptune: 164.79132,
   };
 
-  constructor(public seconds: number) {
+  constructor(private readonly _seconds: number) {
+  }
+
+  get seconds(): number {
+    return this._seconds;
   }
 
   onEarth(): number {
-    const yearsOnEarth = this.calculateYearsOnEarth();
-    return Number(yearsOnEarth.toFixed(2));
+    return this.calculateYearsOnPlanet('earth');
   }
 
   onMercury(): number {
-    const yearsOnMercury = this.calculateYearsOnEarth() / SpaceAge.planetsYearScale.mercury;
-    return Number(yearsOnMercury.toFixed(2));
+    return this.calculateYearsOnPlanet('mercury');
   }
 
   onVenus(): number {
-    const yearsOnVenus = this.calculateYearsOnEarth() / SpaceAge.planetsYearScale.venus;
-    return Number(yearsOnVenus.toFixed(2));
+    return this.calculateYearsOnPlanet('venus');
   }
 
   onMars(): number {
-    const yearsOnMars = this.calculateYearsOnEarth() / SpaceAge.planetsYearScale.mars;
-    return Number(yearsOnMars.toFixed(2));
+    return this.calculateYearsOnPlanet('mars');
   }
 
   onJupiter(): number {
-    const yearsOnMars = this.calculateYearsOnEarth() / SpaceAge.planetsYearScale.jupiter;
-    return Number(yearsOnMars.toFixed(2));
+    return this.calculateYearsOnPlanet('jupiter');
   }
 
   onSaturn(): number {
-    const yearsOnMars = this.calculateYearsOnEarth() / SpaceAge.planetsYearScale.saturn;
-    return Number(yearsOnMars.toFixed(2));
+    return this.calculateYearsOnPlanet('saturn');
   }
 
   onUranus(): number {
-    const yearsOnMars = this.calculateYearsOnEarth() / SpaceAge.planetsYearScale.uranus;
-    return Number(yearsOnMars.toFixed(2));
+    return this.calculateYearsOnPlanet('uranus');
   }
 
   onNeptune(): number {
-    const yearsOnMars = this.calculateYearsOnEarth() / SpaceAge.planetsYearScale.naptune;
-    return Number(yearsOnMars.toFixed(2));
+    return this.calculateYearsOnPlanet('neptune');
+  }
+
+  private calculateYearsOnPlanet(planet: Planet): number {
+    const yearsOnPlanet = this.calculateYearsOnEarth() / SpaceAge.planetsYearScale[planet];
+    return Number(yearsOnPlanet.toFixed(2));
   }
 
   private calculateYearsOnEarth(): number {
