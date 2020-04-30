@@ -2,26 +2,26 @@ import Acronym from './acronym'
 
 describe('Acronym are produced from', () => {
   it('title cased phrases', () => {
-    expect(Acronym.parse('Portable Network Graphics')).toEqual('PNG')
+    expect(Acronym.parse('Portable Network Graphics')).toEqual('PNG');
   });
 
-  xit('other title cased phrases', () => {
-    expect(Acronym.parse('Ruby on Rails')).toEqual('ROR')
+  it('other title cased phrases', () => {
+    expect(Acronym.parse('Ruby on Rails')).toEqual('ROR');
   });
 
-  xit('inconsistently cased phrases', () => {
-    expect(Acronym.parse('HyperText Markup Language')).toEqual('HTML')
+  it('inconsistently cased phrases', () => {
+    expect(Acronym.parse('HyperText Markup Language')).toEqual('HTML');
   });
 
-  xit('phrases with punctuation', () => {
-    expect(Acronym.parse('First In, First Out')).toEqual('FIFO')
+  it('phrases with punctuation', () => {
+    expect(Acronym.parse('First In, First Out')).toEqual('FIFO');
   });
 
-  xit('other phrases with punctuation', () => {
+  it('other phrases with punctuation', () => {
     expect(Acronym.parse('PHP: Hypertext Preprocessor')).toEqual('PHP');
   });
 
-  xit('phrases with punctuation and sentence casing', () => {
-    expect(Acronym.parse('Complementary metal-oxide semiconductor')).toEqual('CMOS')
+  it('phrases with punctuation and sentence casing', () => {
+    expect(Acronym.parse('Complementary metal-oxide semiconductor')).toEqual('CMOS');
   });
 });
