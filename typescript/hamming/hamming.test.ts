@@ -1,3 +1,5 @@
+import Hamming from './hamming'
+
 describe('Hamming', () => {
   const hamming = new Hamming();
 
@@ -37,4 +39,3 @@ describe('Hamming', () => {
 
 });
 
-import Hamming from './hamming'
