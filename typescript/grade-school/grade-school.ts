@@ -2,12 +2,11 @@ export default class GradeSchool {
   private readonly roaster = new Map<string, string[]>();
 
   studentRoster(): Map<string, string[]> {
-    const copyOfRoster = new Map();
-
-    [...this.roaster.entries()].sort()
-      .forEach(([grade, students]) => copyOfRoster.set(grade, [...students]));
-
-    return copyOfRoster;
+    return new Map(
+      [...this.roaster.entries()]
+        .sort()
+        .map(([grade, students]) => ([grade, [...students]]))
+    );
   }
 
   addStudent(student: string, grade: number) {
