@@ -4,7 +4,7 @@ describe('School', () => {
   let gradeSchool: GradeSchool;
 
   beforeEach(() => {
-    gradeSchool = new GradeSchool()
+    gradeSchool = new GradeSchool();
   });
 
   it('a new school has an empty roster', () => {
