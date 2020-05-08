@@ -1,21 +1,24 @@
 class Clock {
+  private static numberOfMinutesInOneHour = 60;
+  private static numberOfHoursInOneDay = 24;
+
   private readonly hours: number;
   private readonly minutes: number;
 
   constructor(hours: number, minutes: number = 0) {
-    const x = minutes / 60;
+    const x = minutes / Clock.numberOfMinutesInOneHour;
     let hoursToAddFromMinutes = x > 0 ? Math.floor(x) : Math.ceil(x);
-    this.minutes = minutes % 60;
+    this.minutes = minutes % Clock.numberOfMinutesInOneHour;
 
     if (this.minutes < 0) {
       hoursToAddFromMinutes--;
-      this.minutes = 60 + this.minutes;
+      this.minutes = Clock.numberOfMinutesInOneHour + this.minutes;
     }
 
-    this.hours = (hoursToAddFromMinutes + hours) % 24;
+    this.hours = (hoursToAddFromMinutes + hours) % Clock.numberOfHoursInOneDay;
 
     if (this.hours < 0) {
-      this.hours = 24 + this.hours;
+      this.hours = Clock.numberOfHoursInOneDay + this.hours;
     }
   }
 
