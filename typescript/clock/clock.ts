@@ -25,14 +25,16 @@ class Clock {
   }
 
   equals(clock: Clock): boolean {
-    return this.hours === clock.hours && this.minutes === clock.minutes;
+    return this.hours === clock.hours
+      && this.minutes === clock.minutes;
   }
 
   toString(): string {
-    const hours = this.hours > 9 ? `${this.hours}` : `0${this.hours}`;
-    const minutes = this.minutes > 9 ? `${this.minutes}` : `0${this.minutes}`;
+    return `${Clock.padZero(this.hours)}:${Clock.padZero(this.minutes)}`;
+  }
 
-    return `${hours}:${minutes}`;
+  private static padZero(number: number): string {
+    return number.toString().padStart(2, '0');
   }
 }
 
