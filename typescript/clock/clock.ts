@@ -12,8 +12,11 @@ class Clock {
       this.minutes = 60 + this.minutes;
     }
 
-    const hoursModulo = (hoursToAddFromMinutes + hours) % 24;
-    this.hours = hoursModulo < 0 ? 24 + hoursModulo : hoursModulo;
+    this.hours = (hoursToAddFromMinutes + hours) % 24;
+
+    if (this.hours < 0) {
+      this.hours = 24 + this.hours;
+    }
   }
 
   plus(minutes: number): Clock {
