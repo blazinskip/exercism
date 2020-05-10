@@ -15,22 +15,20 @@ class NucleotideCount {
     T: 0
   };
 
-  private static acceptedNucleotides: nucleotide[] = ['A', 'C', 'G', 'T'];
-
   static nucleotideCounts(dna: string): nucleotideCountResult {
     return [...dna]
       .reduce((result, nucleotideFromDnaStrand: unknown) => {
         const nucleotide = nucleotideFromDnaStrand as nucleotide;
-        if (NucleotideCount.acceptedNucleotides.includes(nucleotide)) {
-          const nucleotideOccurrences = result[nucleotide] + 1;
+        const nucleotideCounter = result[nucleotide];
 
-          return {
-            ...result,
-            [nucleotide]: nucleotideOccurrences
-          };
+        if (nucleotideCounter === undefined) {
+          throw new Error('Invalid nucleotide in strand');
         }
 
-        throw new Error('Invalid nucleotide in strand');
+        return {
+          ...result,
+          [nucleotide]: nucleotideCounter + 1
+        };
       }, NucleotideCount.initResult);
   }
 }
