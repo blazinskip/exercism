@@ -2,20 +2,20 @@ import LinkedList from './linked-list'
 
 describe('LinkedList', () => {
   it('add/extract elements to the end of the list with push/pop', () => {
-    const list = new LinkedList<number>()
-    list.push(10)
-    list.push(20)
-    expect(list.pop()).toBe(20)
-    expect(list.pop()).toBe(10)
+    const list = new LinkedList<number>();
+    list.push(10);
+    list.push(20);
+    expect(list.pop()).toBe(20);
+    expect(list.pop()).toBe(10);
   })
 
   it('extract elements from the beginning of the list with shift', () => {
-    const list = new LinkedList<number>()
-    list.push(10)
-    list.push(20)
-    expect(list.shift()).toBe(10)
-    expect(list.shift()).toBe(20)
-  })
+    const list = new LinkedList<number>();
+    list.push(10);
+    list.push(20);
+    expect(list.shift()).toBe(10);
+    expect(list.shift()).toBe(20);
+  });
 
   it('add/extract elements from the beginning of the list with unshift/shift', () => {
     const list = new LinkedList<number>()
