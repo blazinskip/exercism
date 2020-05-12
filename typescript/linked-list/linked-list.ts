@@ -18,12 +18,27 @@ class LinkedList<T> {
       this.tail.next = node;
       node.previous = this.tail;
       this.tail = node;
+    }
+  }
+
+  unshift(newElement: T): void {
+    const node = new Node(newElement);
+
+    if (this.counter === LinkedList.EMPTY_LIST) {
+      this.counter ++;
+      this.head = node;
+      this.tail = node;
+    } else {
       this.counter++;
+      // @ts-ignore
+      this.head.previous = node;
+      node.next = this.head;
+      this.head = node;
     }
   }
 
   pop(): T {
-    if (this.tail === null) {
+    if (!this.tail) {
       throw new Error('List is empty');
     }
 
@@ -39,27 +54,25 @@ class LinkedList<T> {
       throw new Error('List is empty');
     }
 
-    return this.head.value;
+    const head = this.head;
+    this.unlink(head);
+    this.head = head.next;
+
+    return head.value;
   }
 
-  unshift(newElement: T): void {
-    this.counter++;
-    const newNode = new Node(newElement);
-
-    if (this.head === null) {
-      this.head = newNode;
-    } else {
-      let tail = this.head;
-      while (this.head.next !== null) {
-        tail = this.head.next;
-      }
-
-      tail.next = newNode;
+  delete(elementToRemove: T): void {
+    if (!this.head) {
+      throw new Error('List is empty');
     }
-  }
 
-  delete(_elementToRemove: T): void {
-
+    let node: Node<T> | null = this.head;
+    do {
+      if (node.value === elementToRemove) {
+        this.unlink(node);
+      }
+      node = node.next;
+    } while (node)
   }
 
   count(): number {
