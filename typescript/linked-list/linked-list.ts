@@ -5,36 +5,34 @@ class LinkedList<T> {
   private tail: Node<T> | null = null;
   private counter = 0;
 
-  push(newElement: T): void {
-    const node = new Node(newElement);
+  push(element: T): void {
+    const node = new Node(element);
 
     if (this.counter === LinkedList.EMPTY_LIST) {
-      this.counter ++;
-      this.head = node;
-      this.tail = node;
+      this.linkFirstElement(node);
     } else {
-      this.counter ++;
       // @ts-ignore
       this.tail.next = node;
       node.previous = this.tail;
       this.tail = node;
     }
+
+    this.counter ++;
   }
 
   unshift(newElement: T): void {
-    const node = new Node(newElement);
+    const element = new Node(newElement);
 
     if (this.counter === LinkedList.EMPTY_LIST) {
-      this.counter ++;
-      this.head = node;
-      this.tail = node;
+      this.linkFirstElement(element);
     } else {
-      this.counter++;
       // @ts-ignore
-      this.head.previous = node;
-      node.next = this.head;
-      this.head = node;
+      this.head.previous = element;
+      element.next = this.head;
+      this.head = element;
     }
+
+    this.counter ++;
   }
 
   pop(): T {
@@ -77,6 +75,11 @@ class LinkedList<T> {
 
   count(): number {
     return this.counter;
+  }
+
+  private linkFirstElement(node: Node<T>) {
+    this.head = node;
+    this.tail = node;
   }
 
   private unlink(node: Node<T>): void {
