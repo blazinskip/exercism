@@ -1,3 +1,4 @@
+
 import HandShake from "./secret-handshake"
 
 describe("Create a handshake for a number", () => {
