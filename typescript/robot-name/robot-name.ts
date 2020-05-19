@@ -18,21 +18,22 @@ export default class RobotName {
   }
 
   private static generateName(): string {
-    let name = [
-      ...RobotName.generateNthRandomCharactersFromString(2, RobotName.letters),
-      ...RobotName.generateNthRandomCharactersFromString(3, RobotName.digits)
-    ].join('');
+    let name = RobotName.buildRobotName();
 
     while (RobotName.currentNames.includes(name)) {
-      name = [
-        ...RobotName.generateNthRandomCharactersFromString(2, RobotName.letters),
-        ...RobotName.generateNthRandomCharactersFromString(3, RobotName.digits)
-      ].join('');
+      name = RobotName.buildRobotName();
     }
 
     this.currentNames = [...this.currentNames, name];
 
     return name;
+  }
+
+  private static buildRobotName() {
+    return [
+      ...RobotName.generateNthRandomCharactersFromString(2, RobotName.letters),
+      ...RobotName.generateNthRandomCharactersFromString(3, RobotName.digits)
+    ].join('');
   }
 
   private static generateNthRandomCharactersFromString(numberOfRandomElements: number, stringOfCharacters: string): string[] {
